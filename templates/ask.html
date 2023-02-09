@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="text-center">
+    <!-- IF AUTHENTICATION FAILED-->
+    {% with messages = get_flashed_messages() %}
+        {% if messages: %}
+            {% for message in messages: %}
+              <p class="text-center fw-bold" style="color: red; margin: 50px 0 0;">
+                  {{ message }}
+              </p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</div>
+
+<!-- ASK SECTION -->
+<div class="container-fluid">
+    <div class="askDiv">
+        <h2 class="text-center m-0">FREQUENTLY ASKED QUESTIONS</h2>
+
+        <!-- this part of the code will be generated -->
+        {% for question in question_list: %}
+            <div class="questionContainer">
+                <h5 class="d-flex justify-content-between align-items-center">
+                    <b>{{ question.question_body }}</b>
+                    <span class="signIcon">+</span>
+                </h5>
+                {% if question.question_answer == "Not Answered Yet" %}
+                    <p style="color: red; font-weight: bold;">{{ question.question_answer }}</p>
+                    {% if logged_in %}
+                    <form method="post">
+                        <input type="hidden" id="questionID" name="hiddenQuestionID" value="{{ question.id }}">
+                        <textarea class="answerArea" id="answerInput" name="answerTextArea" rows="4" cols="50" placeholder="Answer Valid Answer..."></textarea>
+                        <input class="answerButton" type="submit" value="✓">
+                    </form>
+                    {% endif %}
+                {% else %}
+                    <p style="color: green; font-weight: bold;">{{ question.question_answer }}</p>
+                {% endif %}
+                <hr>
+            </div>
+        {% endfor %}
+
+    </div>
+
+    <!-- ADD QUESTION SECTION -->
+    <div class="addQuestion d-flex justify-content-center align-items-center">
+        <button id="addQuestionButton">Add Question</button>
+    </div>
+    <!-- ADD NEW QUESTION FORM -->
+    <div class="addAsk">
+        <form method="post" action="#" class="d-flex flex-column justify-content-center align-items-center">
+            <textarea class="contactArea" id="textInput" name="textArea" rows="4" cols="50" placeholder="Ask anything you want!..."></textarea>
+            <div class="d-flex justify-content-center align-items-center">
+                <input class="confirmButton" type="submit" value="Confirm">
+            </div>
+        </form>
+        <button class="cancelButton">Cancel</button>
+    </div>
+</div>
+{% endblock %}

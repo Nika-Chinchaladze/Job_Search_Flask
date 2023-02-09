@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- PROVIDER SECTION -->
+<div class="container-fluid">
+    <div class="jobProviderDiv">
+        <h2 class="text-start myChosenProvider"></h2>
+        <!-- JOBS TABLE SECTION -->
+        <table class="myTable" id="providerTable">
+            <tr>
+                <th>Job Title</th>
+                <th>Provider Name</th>
+                <th>Category</th>
+                <th>Published Date</th>
+                <th>Expire Date</th>
+                <th>Location</th>
+            </tr>
+
+            <!-- this part of content will be auto generated-->
+            {% for provider, job in provider_list %}
+                <tr>
+                    <td><i class="bi bi-star-fill mystar"></i>&nbsp;<a href="{{ url_for('job_page', id=job.id) }}">{{ job.job_title }}</a></td>
+                    <td><a class="chosenProviderName" href="#">{{ provider.user_name }}</a></td>
+                    <td>{{ job.job_category }}</td>
+                    <td>{{ job.published_date }}</td>
+                    <td>{{ job.expired_date }}</td>
+                    <td>{{ job.job_location }}</td>
+                </tr>
+            {% endfor %}
+
+        </table>
+    </div>
+</div>
+
+{% endblock %}

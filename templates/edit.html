@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- ABOUT SECTION -->
+<div class="container-fluid">
+    <div class="addDiv">
+        <h2 class="text-center m-0">EDIT CURRENT JOB</h2>
+        <form method="post" action="#" class="d-flex flex-column justify-content-center align-items-center addForm">
+            <input class="addInput" type="text" id="jobtitle" name="jobtitle" value="{{ job.job_title }}" placeholder="Enter Job Title...">
+            <select name="jobtype" id="jobcategory">
+                <option value="all">Define Category</option>
+                <option value="it">IT/Programming</option>
+                <option value="education">Education</option>
+                <option value="logistic">Logistics</option>
+                <option value="media">Social Media</option>
+                <option value="beauty">Beauty</option>
+            </select>
+            <select name="jobplace" id="joblocation">
+                <option value="any">Define Place</option>
+                <option value="tbilisi">Tbilisi</option>
+                <option value="kutaisi">Kutaisi</option>
+                <option value="remote">Remote</option>
+            </select>
+            <input class="addDate" type="text" id="jobdate" name="jobdate" value="{{ job.expired_date }}" placeholder="Enter Job Expire Date...">
+            <textarea class="addArea editTextArea1" id="addArea1" name="addArea2" rows="4" cols="50" placeholder="Add Job Description..."></textarea>
+            <input type="hidden" id="textId" name="textId" value="{{ job.job_description }}">
+            <input type="hidden" id="holdJobId" name="holdJobId" value="{{ job.id }}">
+            <input class="addButton" type="submit" value="Edit Current Job">
+        </form>
+    </div>
+</div>
+
+{% endblock %}

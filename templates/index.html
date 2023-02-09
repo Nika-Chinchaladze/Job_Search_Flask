@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- SEARCH BAR SECTION -->
+<div class="container-fluid">
+    <div class="searchDiv d-flex justify-content-center align-items-center">
+        <form method="post" action="#" class="d-flex justify-content-end align-items-center myForm">
+            <select name="placeSelect" id="location">
+                <option value="any">Any Place</option>
+                <option value="Tbilisi">Tbilisi</option>
+                <option value="Kutaisi">Kutaisi</option>
+                <option value="Remote">Remote</option>
+            </select>
+            <select name="typeSelect" id="category">
+                <option value="all">All Category</option>
+                <option value="IT/Programming">IT/Programming</option>
+                <option value="Education">Education</option>
+                <option value="Logistic">Logistics</option>
+                <option value="Social Media">Social Media</option>
+                <option value="Beauty">Beauty</option>
+            </select>
+            <input type="text" id="jname" name="jNameSkill" value="" placeholder="search by skill...">
+            <input type="submit" value="Search" class="submitButton">
+        </form>
+    </div>
+</div>
+
+<!-- JOB PROVIDERS SECTION -->
+<div class="container-fluid">
+    <div class="providerDiv">
+
+        <!-- here each account profile card will be generated -->
+        {% for provider in provider_list: %}
+            {% if provider.user_type == "provider": %}
+                <div class="profileDiv">
+                    <div class="providerImage" style="background-image: url('{{ url_for('static', filename='files/%s'|format(provider.user_image)) }}');"></div>
+                    <h4>{{ provider.user_name.split()[0] }}</h4>
+                    <h4>{{ provider.user_name.split()[-1] }}</h4>
+                    <a href="{{ url_for('provider_page', id=provider.id) }}">View All Jobs</a>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+<div class="text-center">
+    <!-- IF AUTHENTICATION FAILED-->
+    {% with messages = get_flashed_messages() %}
+        {% if messages: %}
+            {% for message in messages: %}
+              <p class="text-center fw-bold" style="color: #367E18; margin: 50px 0 0;">
+                  {{ message }}<i class="bi bi-journal-arrow-down fw-bold ms-3 text-danger"></i>
+              </p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</div>
+
+<!-- JOBS TABLE SECTION -->
+<div class="container-fluid">
+    <div class="tableDiv">
+        <table class="myTable">
+            <tr>
+                <th>Job Title</th>
+                <th>Provider Name</th>
+                <th>Category</th>
+                <th>Published Date</th>
+                <th>Expire Date</th>
+                <th>Location</th>
+            </tr>
+            <!-- here available jobs will be generated -->
+            {% for user, job in job_list: %}
+                <tr>
+                    <td><i class="bi bi-star-fill mystar"></i>&nbsp;<a class="jobProviderPointer" href="{{ url_for('job_page', id=job.id) }}">{{ job.job_title }}</a></td>
+                    <td><a class="jobProviderPointer" href="{{ url_for('provider_page', id=user.id) }}">{{ user.user_name }}</a></td>
+                    <td>{{ job.job_category }}</td>
+                    <td>{{ job.published_date }}</td>
+                    <td>{{ job.expired_date }}</td>
+                    <td>{{ job.job_location }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+{% endblock %}

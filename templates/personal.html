@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- PERSONAL SECTION -->
+<div class="container-fluid">
+    <div class="personalProfileDiv">
+        <div class="backgroundDiv" style="background-image: url('{{ url_for('static', filename='img/provider.jpg') }}');"></div>
+        <div class="personalImageDiv" style="background-image: url('{{ url_for('static', filename='files/%s'|format(user.user_image)) }}');"></div>
+        <h1 class="personName">{{ user.user_name }}</h1>
+        <hr class="mt-5">
+
+        <!-- here job list will be generated automatically -->
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">My Jobs List</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Peaple Who Applied</button>
+          </li>
+        </ul>
+
+        <div class="tab-content" id="myTabContent">
+          <!-- personal provided jobs section -->
+          <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                {% for job in job_list: %}
+                    <h5 class="d-flex justify-content-between align-items-center myJob">
+                        <i class="bi bi-star-fill personIcon"></i>
+                        <a href="{{ url_for('job_page', id=job.id) }}">{{ job.job_title }}</a>
+                        <div>
+                            <a class="editButton" href="{{ url_for('edit_page', id=job.id) }}"><i class="bi bi-pencil-square"></i></a>
+                            <a class="deleteButton" href="{{ url_for('delete_page', id=job.id) }}"><i class="bi bi-trash"></i></a>
+                        </div>
+                    </h5>
+                {% endfor %}
+          </div>
+          <!-- people who applied jobs provided by user section -->
+          <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                <!-- APPLICANTS TABLE SECTION -->
+                <table class="myTable myJob" id="providerTable">
+                    <tr>
+                        <th>Star</th>
+                        <th>Applicant Name</th>
+                        <th>Desired Role</th>
+                        <th>Applicant Email</th>
+                        <th>Applicant Phone</th>
+                        <th>Applicant Resume</th>
+                    </tr>
+
+                    <!-- this part of content will be auto generated-->
+                    {% for applicant in applications_list %}
+                        <tr>
+                            <td><i class="bi bi-star-fill personIcon"></i></td>
+                            <td><span>{{ applicant.applicant_name }}</span></td>
+                            <td><span>{{ applicant.provided_job }}</span></td>
+                            <td><span>{{ applicant.applicant_email }}</span></td>
+                            <td><span>{{ applicant.applicant_phone }}</span></td>
+                            <td><a class="resumeButton" href="{{ url_for('resume_page', name=applicant.applicant_resume) }}" target="_blank" style="text-decoration: underline; color:brown;">Check Resume</a></td>
+                        </tr>
+                    {% endfor %}
+
+                </table>
+
+          </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="text-center">
+    <!-- IF AUTHENTICATION FAILED-->
+    {% with messages = get_flashed_messages() %}
+        {% if messages: %}
+            {% for message in messages: %}
+              <p class="text-center fw-bold" style="color: red; margin: 50px 0 0;">
+                  {{ message }}
+              </p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</div>
+
+<!-- ABOUT SECTION -->
+<div class="container-fluid">
+    <div class="loginDiv d-flex flex-column justify-content-center align-items-center">
+        <h2>Welcome</h2>
+        <i class="bi bi-emoji-heart-eyes-fill myHeart"></i>
+        <form method="post" action="#" class="d-flex flex-column justify-content-center align-items-center loginForm">
+            <input type="email" id="user_name" name="user_name" value="" placeholder="Enter Email..">
+            <input type="password" id="loginPassword" name="loginPassword" value="" placeholder="Enter Password...">
+            <input id="loginButton" type="submit" value="Let Me In">
+        </form>
+        <button class="watchButton"><i class="bi bi-eye-slash-fill"></i></button>
+    </div>
+</div>
+
+{% endblock %}

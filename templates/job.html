@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- JOB DESCRIPTION SECTION -->
+<div class="container-fluid">
+    <div class="jobDescriptionDiv">
+        <h2 class="text-start m-0">{{ job.Jobs.job_title }} &nbsp;<i class="bi bi-star"></i></h2>
+        <div class="additionalInfo">
+            <h6>Job Title: &nbsp;&nbsp;<span>{{ job.Jobs.job_title }}</span></h6>
+            <h6>Job Provider: &nbsp;&nbsp;<span><a href="{{ url_for('provider_page', id=job.Users.id) }}">{{ job.Users.user_name }}</a></span></h6>
+            <h6>Published Date: &nbsp;&nbsp;<span>{{ job.Jobs.published_date }}</span></h6>
+            <h6>Expire Date: &nbsp;&nbsp;<span>{{ job.Jobs.expired_date }}</span></h6>
+        </div>
+        <p>
+            {{ job.Jobs.job_description }}
+        </p>
+
+
+        <div class="d-flex justify-content-end align-items-center">
+          <button class="applyButton">Apply Job</button>
+        </div>
+
+        <!-- HIDDEN FORM IF JOB SEEKER DECIDES TO APPLY FOR THE JOB -->
+        <div class="jobFillForm">
+          <form method="post" enctype="multipart/form-data" action="#" class="d-flex flex-column justify-content-center align-items-center">
+              <h4 style="color: gold;">Upload your RESUME in PDF format</h4>
+              <input type="hidden" id="jobProviderNameHold" name="jobProviderNameHold" value="{{ job.Users.user_email }}">
+              <input type="hidden" id="jobProvidedHeadHold" name="jobProvidedHeadHold" value="{{ job.Jobs.job_title }}">
+              <input class="applyJob" type="text" id="user_name" name="user_name" value="" placeholder="Enter Full Name..">
+              <input class="applyJob" type="email" id="email" name="email" value="" placeholder="Enter Email..">
+              <input class="applyJob" type="text" id="phone" name="phone" value="" placeholder="Enter Phone Number...">
+              <input class="applyJob" type="file" id="pdf" name="user_pdf" accept="application/pdf">
+              <div class="d-flex justify-content-center align-items-center">
+                  <input class="jobApplyButton" type="submit" value="Confirm">
+              </div>
+          </form>
+          <button class="jobCancelButton">Cancel</button>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

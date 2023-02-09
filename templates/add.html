@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- ABOUT SECTION -->
+<div class="container-fluid">
+    <div class="addDiv">
+        <h2 class="text-center m-0">ADD NEW OPPORTUNITY FOR JOB SEEKERS</h2>
+        <form method="post" action="#" class="d-flex flex-column justify-content-center align-items-center addForm">
+            <input class="addInput" type="text" id="jobtitle" name="jobtitle" value="" placeholder="Enter Job Title...">
+            <select name="jobtype" id="jobcategory">
+                <option value="all">Define Category</option>
+                <option value="IT/Programming">IT/Programming</option>
+                <option value="Education">Education</option>
+                <option value="Logistics">Logistics</option>
+                <option value="Social Media">Social Media</option>
+                <option value="Beauty">Beauty</option>
+            </select>
+            <select name="jobplace" id="joblocation">
+                <option value="any">Define Place</option>
+                <option value="Tbilisi">Tbilisi</option>
+                <option value="Kutaisi">Kutaisi</option>
+                <option value="Remote">Remote</option>
+            </select>
+            <input class="addDate" type="text" id="jobdate" name="jobdate" value="" placeholder="Enter Job Expire Date...">
+            <textarea class="addArea" id="addArea1" name="addArea2" rows="4" cols="50" placeholder="Add Job Description..."></textarea>
+            <input class="addButton" type="submit" value="Add New Job">
+        </form>
+    </div>
+</div>
+{% endblock %}

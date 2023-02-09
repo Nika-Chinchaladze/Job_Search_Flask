@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="text-center">
+    <!-- IF MESSAGE IS SENT -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages: %}
+            {% for message in messages: %}
+              <p class="text-center fw-bold" style="color: #13005A; margin: 50px 0 0;">
+                  {{ message }}
+              </p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</div>
+
+<!-- CONTACT SECTION -->
+<div class="container-fluid">
+    <div class="contactDiv">
+        <h2 class="text-center m-0">CONTACT US</h2>
+        <form method="post" action="#" class="d-flex flex-column justify-content-center align-items-center">
+            <input class="contactInput" type="text" id="fullname" name="fullname" value="" placeholder="Enter Your Name...">
+            <input class="contactInput" type="text" id="email" name="email" value="" placeholder="Enter Email Address...">
+            <textarea class="contactArea" id="textInput" name="textArea" rows="4" cols="50" placeholder="Enter Message..."></textarea>
+            <input class="contactButton" type="submit" value="Send Email">
+        </form>
+    </div>
+</div>
+
+{% endblock %}
