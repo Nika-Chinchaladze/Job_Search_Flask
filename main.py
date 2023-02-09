@@ -10,7 +10,7 @@ from datetime import date
 from gmail_class import SendEmail
 
 app = Flask(__name__)
-app.config["SECRET_KEY"] = "TommyShelby"
+app.config["SECRET_KEY"] = os.environ.get("MY_SECRET_KEY")
 # =================================== UPLOAD FILES SECTION =================================== #
 UPLOAD_FOLDER = "static/files"
 ALLOWED_EXTENSIONS = ['pdf', 'png', 'jpg', 'jpeg']
