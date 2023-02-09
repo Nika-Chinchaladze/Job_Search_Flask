@@ -1,6 +1,7 @@
 from email.message import EmailMessage
 import ssl
 import smtplib
+import os
 
 
 class SendEmail:
